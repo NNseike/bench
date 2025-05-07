@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>おはら vs おかもん vs 清家 魂のベンチプレス対決！</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 基本リセットと共通スタイル */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1a1a1a; /* ダークな背景 */
+            color: #f5f5f5;
+            line-height: 1.6;
+            overflow-x: hidden; /* 横スクロールバー対策 */
+            min-height: 100vh; /* コンテンツが少ない場合でも高さを確保 */
+            display: flex; /* フッターを最下部に配置しやすくするため */
+            flex-direction: column; /* フッターを最下部に配置しやすくするため */
+        }
+        main {
+            flex-grow: 1; /* フッターを最下部に配置しやすくするため */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            color: #ff6600; /* メインアクセントカラー */
+            margin-bottom: 0.8em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3.5rem; text-transform: uppercase; }
+        h2 { font-size: 2.8rem; text-align: center; margin-bottom: 40px; }
+        h3 { font-size: 1.8rem; color: #ffcc00; /* サブアクセント */ }
+        p { margin-bottom: 1em; }
+        a { color: #ffcc00; text-decoration: none; }
+        a:hover { color: #ffffff; }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .content-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 60px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #ff6600;
+            border-radius: 2px;
+        }
+
+        .animated-element {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .challenger-card {
+             opacity: 0;
+            transform: translateY(30px);
+        }
+
+
+        .danger-text {
+            color: #e60000;
+            font-weight: bold;
+        }
+        .highlight-punishment {
+            background-color: #e60000;
+            color: white;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #111;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease 0.5s;
+        }
+        .loader-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            color: #ff6600;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        .barbell-loader {
+            font-size: 3rem;
+            animation: lift 1s infinite alternate ease-in-out;
+        }
+        @keyframes lift {
+            0% { transform: translateY(10px); }
+            100% { transform: translateY(-10px); }
+        }
+        #preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Header */
+        #main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        #main-header nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-link {
+            color: #f5f5f5;
+            margin: 0 15px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #ff6600;
+            transform: translateY(-2px);
+        }
+
+        /* Section 1: Hero */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+        }
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+        #particles-js-hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        /* バーベルアイコンは削除したので、スタイルもコメントアウトまたは削除
+        .hero-barbell-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        */
+        .main-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 0.2em;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+        .main-title .char {
+            display: inline-block;
+            opacity: 0;
+        }
+        .sub-title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #ffcc00;
+            margin-bottom: 0.5em;
+            font-family: 'Oswald', sans-serif;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+        .penalty-preview {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: #e60000;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(255,255,255,0.3);
+        }
+
+        #countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .timer-box {
+            background-color: rgba(255, 102, 0, 0.85);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 90px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        .timer-box span:first-child {
+            font-size: 2.5rem;
+            font-family: 'Oswald', sans-serif;
+            display: block;
+            line-height: 1;
+        }
+        .timer-box span:last-child {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .scroll-down-btn {
+            display: inline-block;
+            margin-top: 40px;
+            font-size: 1.2rem;
+            color: #fff;
+            padding: 10px 20px;
+            border: 2px solid #ff6600;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .scroll-down-btn:hover {
+            background-color: #ff6600;
+            color: #1a1a1a;
+        }
+
+        /* Section 2: Overview */
+        #overview {
+            background-color: #222;
+        }
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .overview-item {
+            background-color: #333;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .overview-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+        .overview-item .icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+            color: #ff6600;
+        }
+        .punishment-game {
+            border: 3px solid #e60000;
+        }
+        .punishment-image {
+            margin-top: 20px;
+            border-radius: 5px;
+            border: 2px solid #555;
+        }
+
+        /* Section 3: Challengers */
+        .challengers-container {
+            display: grid;
+            /* grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); */ /* 横並びから変更 */
+            grid-template-columns: 1fr; /* 縦一列にする */
+            gap: 30px;
+            align-items: stretch;
+            max-width: 700px; /* カードが横に広がりすぎないようにコンテナの幅を制限 */
+            margin-left: auto;  /* コンテナを中央寄せ */
+            margin-right: auto; /* コンテナを中央寄せ */
+        }
+        .challenger-card {
+            background-color: #2a2a2a;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, box-shadow 0.4s ease, border-left-color 0.3s ease;
+            border-left: 5px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+        .challenger-card:hover {
+            transform: scale(1.03); /* 少し小さくする (縦並びなので控えめに) */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
+        #player-ohara:hover { border-left-color: #ff6600; }
+        #player-seike:hover { border-left-color: #28a745; } /* 清家さんのテーマカラー */
+        #player-okamon:hover { border-left-color: #007bff; }
+
+
+        .challenger-image-wrapper {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 4px solid #444;
+            transition: border-color 0.3s ease;
+        }
+        .challenger-card:hover .challenger-image-wrapper {
+            border-color: #ff6600;
+        }
+        .challenger-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .challenger-card h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        .nickname {
+            font-size: 1.1rem;
+            color: #ffcc00;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+        .max-weight {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .motto {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .strengths {
+            margin-top: auto;
+        }
+        .strengths span {
+            display: inline-block;
+            background-color: #444;
+            color: #ffcc00;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 5px;
+        }
+
+        /* Section 4: Vote */
+        #vote {
+            background-color: #222;
+        }
+        .vote-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .vote-block {
+            background-color: #333;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        .vote-block h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .vote-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .vote-btn:hover {
+            background-color: #e65c00;
+            transform: translateY(-2px);
+        }
+        .vote-btn:active {
+            transform: translateY(0);
+        }
+        .poll-results {
+            margin-top: 20px;
+        }
+        .poll-results p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .poll-results .bar-container {
+            flex-grow: 1;
+            background-color: #444;
+            border-radius: 3px;
+            margin-left: 10px;
+            margin-right: 5px;
+            height: 15px;
+            position: relative;
+        }
+        .poll-results .bar {
+            display: block;
+            height: 100%;
+            background-color: #ffcc00;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.5s ease-out;
+            min-width: 1px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .poll-results .count {
+            font-weight: bold;
+            min-width: 30px;
+            text-align: right;
+        }
+
+        .message-board-container {
+            background-color: #333;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+        .message-board-container h3 {
+            text-align: center;
+            font-size: 1.6rem;
+        }
+        #message-input {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #555;
+            background-color: #444;
+            color: #f5f5f5;
+            font-family: 'Roboto', sans-serif;
+        }
+        #submit-message-btn {
+            display: block;
+            width: auto;
+            margin: 0 auto 20px auto;
+            padding: 10px 30px;
+            background-color: #ffcc00;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #submit-message-btn:hover {
+            background-color: #e6b800;
+        }
+        #message-board {
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 5px;
+            background-color: #2a2a2a;
+            border-radius: 5px;
+        }
+        #message-board h4 {
+            font-size: 1.3rem;
+            color: #ff6600;
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+        .message-item {
+            background-color: #444;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 3px solid #ffcc00;
+            word-wrap: break-word;
+        }
+        .message-item p { margin-bottom: 0; }
+        .message-item small {
+            font-size: 0.8rem;
+            color: #aaa;
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Section 5: Results */
+        .results-content .coming-soon {
+            font-size: 1.5rem;
+            text-align: center;
+            color: #ccc;
+            padding: 40px 0;
+            border: 2px dashed #555;
+            border-radius: 8px;
+        }
+        .result-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .winner-announcement, .loser-announcement {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .winner-announcement { background-color: rgba(255, 204, 0, 0.2); border: 2px solid #ffcc00; }
+        .loser-announcement { background-color: rgba(230, 0, 0, 0.2); border: 2px solid #e60000; }
+        .winner-announcement h3 { color: #ffcc00; }
+        .loser-announcement h3 { color: #e60000; }
+        .winner-name, .loser-name { font-size: 1.8rem; font-weight: bold; margin-bottom: 10px; }
+        .winner-record { font-size: 1.5rem; }
+        .loser-image { margin: 15px auto 0; border-radius: 5px; }
+
+        .match-highlights h4 { text-align: center; font-size: 1.5rem; }
+        .highlight-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .highlight-gallery img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 2px solid #555;
+        }
+
+        /* Section 6: Share */
+        #share {
+            background-color: #222;
+        }
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .share-btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: opacity 0.3s, transform 0.3s;
+            min-width: 180px;
+            text-align: center;
+        }
+        .share-btn:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+        .twitter-btn { background-color: #1DA1F2; }
+        .facebook-btn { background-color: #1877F2; }
+        .line-btn { background-color: #00B900; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #111;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .main-title { font-size: clamp(2rem, 10vw, 3.5rem); }
+            .sub-title { font-size: clamp(1.2rem, 5vw, 1.8rem); }
+            
+            #main-header nav { justify-content: space-around; flex-wrap: wrap; }
+            .nav-link { margin: 5px 10px; font-size: 0.9rem; }
+            
+            .overview-grid, .vote-container { /* .challengers-container は既に1frなので除外 */
+                grid-template-columns: 1fr;
+            }
+            .timer-box { min-width: 70px; padding: 10px; }
+            .timer-box span:first-child { font-size: 1.8rem; }
+            .timer-box span:last-child { font-size: 0.7rem; }
+
+            .challenger-card { padding: 20px; }
+            .challenger-image-wrapper { width: 120px; height: 120px; }
+
+            .result-summary { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .content-section { padding: 50px 15px; }
+            .main-title { letter-spacing: -1px; }
+            .timer-box { gap: 5px; flex-basis: 45%; }
+            .share-btn { width: 100%; margin-bottom: 10px; }
+            .poll-results p { flex-direction: column; align-items: flex-start;}
+            .poll-results .bar-container { width: 100%; margin-left: 0; margin-bottom: 5px;}
+            .poll-results .count { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="loader-text">LOADING...</div>
+        <div class="barbell-loader">🏋️</div>
+    </div>
+
+    <header id="main-header">
+        <nav>
+            <a href="#hero" class="nav-link">トップ</a>
+            <a href="#overview" class="nav-link">概要</a>
+            <a href="#challengers" class="nav-link">選手</a>
+            <a href="#vote" class="nav-link">応援</a>
+            <a href="#results" class="nav-link">結果</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <div id="particles-js-hero"></div>
+            <div class="hero-content">
+                <!-- バーベルアイコンを削除 -->
+                <h1 class="main-title">
+                    <span class="char">魂</span><span class="char">の</span><span class="char">ベ</span><span class="char">ン</span><span class="char">チ</span><span class="char">プ</span><span class="char">レ</span><span class="char">ス</span><span class="char">対</span><span class="char">決</span><span class="char">！</span>
+                </h1>
+                <p class="sub-title animated-element">おはら vs おかもん vs 清家</p>
+                <p class="penalty-preview animated-element">～敗者は満腹飯x10の地獄行き～</p>
+                <div id="countdown-timer" class="animated-element">
+                    <div class="timer-box"><span id="days">00</span><span>日</span></div>
+                    <div class="timer-box"><span id="hours">00</span><span>時間</span></div>
+                    <div class="timer-box"><span id="minutes">00</span><span>分</span></div>
+                    <div class="timer-box"><span id="seconds">00</span><span>秒</span></div>
+                </div>
+                <a href="#overview" class="scroll-down-btn animated-element">▼ Scroll Down ▼</a>
+            </div>
+        </section>
+
+        <section id="overview" class="content-section">
+            <h2 class="section-title animated-element">対決の概要 & ルール</h2>
+            <div class="overview-grid">
+                <div class="overview-item animated-element">
+                    <h3><span class="icon">📅</span>開催日時</h3>
+                    <p id="event-date-location">おはら出禁解除次第 @ PSPO東石井</p>
+                </div>
+                <div class="overview-item animated-element">
+                    <h3><span class="icon">📜</span>対決ルール</h3>
+                    <p>1RM(最大挙上重量)方式！<br>MAX重量を競う！<br>体重比も考慮…は、なし！純粋なパワー勝負！</p>
+                </div>
+                <div class="overview-item punishment-game animated-element">
+                    <h3><span class="icon">💀</span><span class="danger-text">恐怖の罰ゲーム</span></h3>
+                    <p>敗者は... <strong class="highlight-punishment">超絶満腹飯 x 10人前</strong> を自腹でおごり！</p>
+                    <img src="assets/images/manpuku.jpg" alt="満腹飯イメージ" class="punishment-image">
+                </div>
+            </div>
+        </section>
+
+        <section id="challengers" class="content-section">
+            <h2 class="section-title animated-element">挑戦者たち！</h2>
+            <div class="challengers-container">
+                <!-- 順番変更: おはら -> 清家 -> おかもん -->
+                <div class="challenger-card" id="player-ohara">
+                    <div class="challenger-image-wrapper">
+                        <img src="assets/images/ohara.jpg" alt="おはら選手">
+                    </div>
+                    <h3>おはら</h3>
+                    <p class="nickname">"サイレントキラー"</p>
+                    <p class="max-weight">自己ベスト: 32kg (目標: 33kg)</p>
+                    <p class="motto">「今日の俺は、昨日より強い。そして明日はもっと強い！」</p>
+                    <div class="strengths">
+                        <span>粘り強さ</span> <span>フォーム重視</span>
+                    </div>
+                </div>
+                <div class="challenger-card" id="player-seike">
+                     <div class="challenger-image-wrapper">
+                        <img src="assets/images/seike.jpg" alt="清家選手">
+                    </div>
+                    <h3>清家</h3>
+                    <p class="nickname">"精密機械"</p>
+                    <p class="max-weight">自己ベスト: 120kg (目標: 130kg)</p>
+                    <p class="motto">「上げるべくして上げる。ただ、それだけだ。」</p>
+                     <div class="strengths">
+                        <span>テクニック</span> <span>安定感</span>
+                    </div>
+                </div>
+                <div class="challenger-card" id="player-okamon">
+                     <div class="challenger-image-wrapper">
+                        <img src="assets/images/okamoto.jpg" alt="おかもん選手">
+                    </div>
+                    <h3>おかもん</h3>
+                    <p class="nickname">"GG"</p>
+                    <p class="nickname">"アニー"</p>
+                    <p class="nickname">"自称大学生"</p>
+                    <p class="nickname">"悪性ニート"</p>
+                    <p class="nickname">"k.okamoto"</p>
+                    <p class="nickname">"ベル@隻眼の王"</p>
+                    <p class="nickname">"エピソードモンス"</p>
+                    <p class="nickname">"河原のMr.アンチェイン"</p>
+                    <p class="nickname">"河原のブラックリスト(ガチ)"</p>
+                    <p class="max-weight">自己ベスト: ???</p>
+                    <p class="motto">「今日の獲物はお前たちだ。」</p>
+                    <p class="motto">「外国人の煽りウザぇ。ありえない負け方をしたのでコラボステージを改善したほうがいい。」</p>
+                     <div class="strengths">
+                        <span>爆発力</span> <span>高重量特化</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="vote" class="content-section">
+            <h2 class="section-title animated-element">応援 & 勝敗予想！</h2>
+            <div class="vote-container">
+                <div class="vote-block animated-element">
+                    <h4>誰が勝つか予想！</h4>
+                    <button class="vote-btn" data-vote-target="ohara" data-vote-type="winner">おはら 勝利！</button>
+                    <button class="vote-btn" data-vote-target="okamon" data-vote-type="winner">おかもん 勝利！</button>
+                    <button class="vote-btn" data-vote-target="seike" data-vote-type="winner">清家 勝利！</button>
+                    <div id="winner-poll-results" class="poll-results">
+                        <p>おはら: <span class="bar-container"><span class="bar" data-player="ohara-winner-bar"></span></span> <span class="count" data-player="ohara-winner-count">0</span>票</p>
+                        <p>おかもん: <span class="bar-container"><span class="bar" data-player="okamon-winner-bar"></span></span> <span class="count" data-player="okamon-winner-count">0</span>票</p>
+                        <p>清家: <span class="bar-container"><span class="bar" data-player="seike-winner-bar"></span></span> <span class="count" data-player="seike-winner-count">9</span>票</p>
+                    </div>
+                </div>
+                <div class="vote-block animated-element">
+                    <h4>誰が満腹飯か予想！ (恐怖の罰ゲーム)</h4>
+                    <button class="vote-btn" data-vote-target="ohara" data-vote-type="loser">おはらが満腹飯…</button>
+                    <button class="vote-btn" data-vote-target="okamon" data-vote-type="loser">おかもんが満腹飯…</button>
+                    <button class="vote-btn" data-vote-target="seike" data-vote-type="loser">清家が満腹飯…</button>
+                     <div id="loser-poll-results" class="poll-results">
+                        <p>おはら: <span class="bar-container"><span class="bar" data-player="ohara-loser-bar"></span></span> <span class="count" data-player="ohara-loser-count">0</span>票</p>
+                        <p>おかもん: <span class="bar-container"><span class="bar" data-player="okamon-loser-bar"></span></span> <span class="count" data-player="okamon-loser-count">0</span>票</p>
+                        <p>清家: <span class="bar-container"><span class="bar" data-player="seike-loser-bar"></span></span> <span class="count" data-player="seike-loser-count">0</span>票</p>
+                    </div>
+                </div>
+            </div>
+            <div class="message-board-container animated-element">
+                <h3>応援メッセージを送ろう！</h3>
+                <textarea id="message-input" placeholder="例: 清家さん、絶対勝ってください！応援してます！" maxlength="200"></textarea>
+                <button id="submit-message-btn">メッセージ送信</button>
+                <div id="message-board">
+                    <h4>応援の声</h4>
+                </div>
+            </div>
+        </section>
+
+        <section id="results" class="content-section">
+            <h2 class="section-title animated-element">決戦の記録</h2>
+            <div class="results-content animated-element">
+                <p class="coming-soon">対決まであと <span id="results-countdown-days">X</span> 日！結果をお楽しみに！</p>
+                <!-- 以下、対決後に更新するコンテンツ例 -->
+                <!--
+                <div class="result-summary">
+                    <div class="winner-announcement">
+                        <h3>🏆 WINNER 🏆</h3>
+                        <p class="winner-name">おかもん選手！</p>
+                        <p class="winner-record">記録: 115kg</p>
+                    </div>
+                    <div class="loser-announcement">
+                        <h3>💀 満腹飯確定 💀</h3>
+                        <p class="loser-name">清家選手...</p>
+                        <img src="https://via.placeholder.com/300x200/555555/ffffff?Text=満腹飯の犠牲者" alt="敗者の末路" class="loser-image">
+                    </div>
+                </div>
+                <div class="match-highlights">
+                    <h4>ハイライト写真</h4>
+                    <div class="highlight-gallery">
+                        <img src="https://via.placeholder.com/200x150/cccccc/000000?Text=Highlight+1" alt="ハイライト1">
+                        <img src="https://via.placeholder.com/200x150/cccccc/000000?Text=Highlight+2" alt="ハイライト2">
+                        <img src="https://via.placeholder.com/200x150/cccccc/000000?Text=Highlight+3" alt="ハイライト3">
+                    </div>
+                </div>
+                -->
+            </div>
+        </section>
+
+        <section id="share" class="content-section">
+            <h2 class="section-title animated-element">この熱狂をシェア！</h2>
+            <div class="share-buttons animated-element">
+                <a href="#" id="share-twitter" class="share-btn twitter-btn" target="_blank" rel="noopener noreferrer">X (Twitter)でシェア</a>
+                <a href="#" id="share-facebook" class="share-btn facebook-btn" target="_blank" rel="noopener noreferrer">Facebookでシェア</a>
+                <a href="#" id="share-line" class="share-btn line-btn" target="_blank" rel="noopener noreferrer">LINEで送る</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="copyright-year">2024</span> ベンチプレス対決実行委員会 (おはら & おかもん & 清家)</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- グローバル定数・変数 ---
+            const EVENT_DATE_STRING = "May 17, 2025 18:00:00"; // !!! 対決日時を必ず変更してください !!!
+            const COUNTDOWN_TARGET_DATE = new Date(EVENT_DATE_STRING).getTime();
+            
+            const preloader = document.getElementById('preloader');
+            const VOTE_STORAGE_KEY = 'benchpressBattleVotes_v4'; // ストレージキー更新の際はバージョンアップ
+            const MESSAGES_STORAGE_KEY = 'benchpressBattleMessages_v4';
+            const PAGE_URL = window.location.href;
+            const PAGE_TITLE = document.title;
+
+            // --- 初期化処理 ---
+            initPreloader();
+            initSmoothScroll();
+            initCopyrightYear();
+            initShareButtons();
+            
+            let libLoadAttempts = 0;
+            function tryInitLibs() {
+                libLoadAttempts++;
+                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && typeof tsParticles !== 'undefined') {
+                    initAnimationsAndParticles();
+                } else if (libLoadAttempts < 10) {
+                    console.warn(`GSAP/ScrollTrigger/tsParticles not yet available. Attempt ${libLoadAttempts}. Retrying...`);
+                    setTimeout(tryInitLibs, 500); 
+                } else {
+                    console.error('Failed to load GSAP/ScrollTrigger/tsParticles. Animations/particles may not work.');
+                }
+            }
+            tryInitLibs();
+            
+            initCountdown();
+            initVotingSystem();
+            initMessageBoard();
+
+            // --- 関数定義 ---
+            function initAnimationsAndParticles() {
+                if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+                    console.error('GSAP or ScrollTrigger is not loaded.');
+                    return;
+                }
+                gsap.registerPlugin(ScrollTrigger);
+                initHeroAnimations();
+                initScrollBasedAnimations();
+                initChallengerCardHover();
+                if (typeof tsParticles !== 'undefined') {
+                    initParticleEffectsHero();
+                } else {
+                    console.warn('tsParticles is not loaded.');
+                }
+            }
+
+            function initPreloader() {
+                if (!preloader) return;
+                window.addEventListener('load', () => {
+                    preloader.classList.add('loaded');
+                    preloader.addEventListener('transitionend', () => {
+                        if (preloader.classList.contains('loaded')) {
+                           try { preloader.remove(); } catch(e) { /* ignore */ }
+                        }
+                    }, { once: true });
+                });
+                setTimeout(() => {
+                    if (preloader && !preloader.classList.contains('loaded')) {
+                        preloader.classList.add('loaded');
+                         try { preloader.remove(); } catch(e) { /* ignore */ }
+                    }
+                }, 5000);
+            }
+
+            function initSmoothScroll() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        if (targetId === "#") return;
+                        try {
+                            const targetElement = document.querySelector(targetId);
+                            if (targetElement) {
+                                targetElement.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        } catch (error) {
+                            console.error("Error in smooth scroll:", error);
+                        }
+                    });
+                });
+            }
+
+            function initCopyrightYear() {
+                const yearEl = document.getElementById('copyright-year');
+                if (yearEl) {
+                    yearEl.textContent = new Date().getFullYear();
+                }
+            }
+
+            function initShareButtons() {
+                const shareText = `${PAGE_TITLE} 誰が勝つか予想しよう！`;
+                const encodedUrl = encodeURIComponent(PAGE_URL);
+                const encodedText = encodeURIComponent(shareText);
+
+                const twitterBtn = document.getElementById('share-twitter');
+                if (twitterBtn) twitterBtn.href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+                
+                const facebookBtn = document.getElementById('share-facebook');
+                if (facebookBtn) facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+                const lineBtn = document.getElementById('share-line');
+                if (lineBtn) lineBtn.href = `line://msg/text/${encodedText}%0D%0A${encodedUrl}`;
+            }
+
+            function initHeroAnimations() {
+                const heroContent = document.querySelector('.hero-content');
+                if (!heroContent) return;
+
+                const mainTitleChars = Array.from(heroContent.querySelectorAll('.main-title .char'));
+                const subTitle = heroContent.querySelector('.sub-title');
+                const penaltyPreview = heroContent.querySelector('.penalty-preview');
+                const countdownTimerEl = heroContent.querySelector('#countdown-timer');
+                const scrollDownBtn = heroContent.querySelector('.scroll-down-btn');
+                // const heroBarbellIcon = heroContent.querySelector('.hero-barbell-icon'); // バーベルアイコンは削除
+
+                gsap.set([subTitle, penaltyPreview, countdownTimerEl, scrollDownBtn].filter(el => el), { autoAlpha: 0, y: 30 });
+                if (mainTitleChars.length > 0) gsap.set(mainTitleChars, { autoAlpha: 0, y: 20, scale:0.8, rotateX: -90});
+
+                const tl = gsap.timeline({ delay: (preloader && !preloader.classList.contains('loaded') ? 0.7 : 0.2) });
+
+                // バーベルアイコンのアニメーションは削除
+                // if(heroBarbellIcon) { ... }
+
+                if (mainTitleChars.length > 0) {
+                    tl.to(mainTitleChars, {
+                        autoAlpha: 1, y: 0, scale:1, rotateX:0, 
+                        ease: "back.out(1.7)", stagger: 0.05 
+                    }); // タイムラインの開始に設定
+                }
+
+                const subsequentElements = [subTitle, penaltyPreview, countdownTimerEl, scrollDownBtn].filter(el => el);
+                if (subsequentElements.length > 0) {
+                    tl.to(subsequentElements, { 
+                        autoAlpha: 1, y: 0, duration: 0.7, 
+                        ease: "power2.out", stagger: 0.15 
+                    }, mainTitleChars.length > 0 ? "-=0.5" : "+=0"); // タイトルアニメーションがあれば少し重ねる
+                }
+            }
+
+            function initCountdown() {
+                const daysEl = document.getElementById('days');
+                const hoursEl = document.getElementById('hours');
+                const minutesEl = document.getElementById('minutes');
+                const secondsEl = document.getElementById('seconds');
+                const resultsCountdownDaysEl = document.getElementById('results-countdown-days');
+                
+                let countdownElementsExist = daysEl && hoursEl && minutesEl && secondsEl;
+                let intervalId = null; // intervalIdをスコープ内で宣言
+
+                function updateTime() {
+                    const now = new Date().getTime();
+                    const distance = COUNTDOWN_TARGET_DATE - now;
+
+                    if (distance < 0) {
+                        if(countdownElementsExist) {
+                            const countdownTimerEl = document.getElementById('countdown-timer');
+                            if(countdownTimerEl) {
+                               countdownTimerEl.innerHTML = "<div style='font-size:1.5em; color: #ffcc00; padding: 10px;'>決戦開始！</div>";
+                            }
+                        }
+                        if(resultsCountdownDaysEl && resultsCountdownDaysEl.parentElement) {
+                            resultsCountdownDaysEl.parentElement.textContent = "決戦当日または終了！";
+                        }
+                        if (intervalId) clearInterval(intervalId); // intervalIdでクリア
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    if(countdownElementsExist) {
+                        daysEl.textContent = String(days).padStart(2, '0');
+                        hoursEl.textContent = String(hours).padStart(2, '0');
+                        minutesEl.textContent = String(minutes).padStart(2, '0');
+                        secondsEl.textContent = String(seconds).padStart(2, '0');
+                    }
+
+                    if (resultsCountdownDaysEl) {
+                        resultsCountdownDaysEl.textContent = days;
+                    }
+                }
+                
+                updateTime();
+                intervalId = setInterval(updateTime, 1000); // intervalIdに代入
+            }
+
+            function initScrollBasedAnimations() {
+                document.querySelectorAll('.animated-element:not(#hero .animated-element):not(.challenger-card)').forEach(el => {
+                    gsap.fromTo(el,
+                        { autoAlpha: 0, y: 50 },
+                        {
+                            autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2.out',
+                            scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+                        }
+                    );
+                });
+
+                const challengerCards = document.querySelectorAll('.challenger-card');
+                if (challengerCards.length > 0) {
+                    challengerCards.forEach((card, index) => {
+                        gsap.fromTo(card,
+                            { autoAlpha: 0, y: 50, scale: 0.9 },
+                            {
+                                autoAlpha: 1, y: 0, scale: 1, duration: 0.6, ease: 'back.out(1.2)',
+                                delay: index * 0.15, // 少し遅延させて順番に表示
+                                scrollTrigger: { trigger: card, start: 'top 80%', toggleActions: 'play none none none' }
+                            }
+                        );
+                    });
+                }
+            }
+
+            async function initParticleEffectsHero() {
+                const particleContainer = document.getElementById('particles-js-hero');
+                if (!particleContainer) return;
+                try {
+                    await tsParticles.load("particles-js-hero", {
+                        fpsLimit: 60, particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: ["#ff6600", "#ffcc00", "#e60000"] }, shape: { type: "circle" }, opacity: { value: {min: 0.3, max: 0.8}, animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false } }, size: { value: {min: 1, max: 4}, animation: { enable: true, speed: 3, minimumValue: 0.1, sync: false } }, links: { enable: false }, move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out", attract: { enable: false } } }, interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } } }, detectRetina: true,
+                    });
+                } catch (error) {
+                    console.error("Error loading tsParticles:", error);
+                }
+            }
+
+            function initChallengerCardHover() {
+                const cards = document.querySelectorAll('.challenger-card');
+                cards.forEach(card => {
+                    const img = card.querySelector('img');
+                    if (img) {
+                        card.addEventListener('mouseenter', () => gsap.to(img, { scale: 1.1, duration: 0.3, ease: 'power1.out' }));
+                        card.addEventListener('mouseleave', () => gsap.to(img, { scale: 1, duration: 0.3, ease: 'power1.out' }));
+                    }
+                });
+            }
+
+            function initVotingSystem() {
+                const voteButtons = document.querySelectorAll('.vote-btn');
+                let votes = {};
+                try {
+                     votes = JSON.parse(localStorage.getItem(VOTE_STORAGE_KEY)) || {};
+                } catch(e){ console.error("Error parsing votes from localStorage", e); votes = {}; }
+
+                updatePollResultsDOM(votes);
+
+                voteButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const target = button.dataset.voteTarget;
+                        const type = button.dataset.voteType;
+                        const voteKey = `${target}-${type}`;
+                        votes[voteKey] = (votes[voteKey] || 0) + 1;
+                        try {
+                            localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(votes));
+                        } catch (e) { console.error("Error saving votes to localStorage", e); }
+                        updatePollResultsDOM(votes);
+                        gsap.fromTo(button, {scale: 1}, {scale: 0.95, yoyo: true, repeat: 1, duration: 0.1, ease: "power1.inOut"});
+                    });
+                });
+
+                function updatePollResultsDOM(currentVotes) {
+                    let totalWinnerVotes = 0;
+                    let totalLoserVotes = 0;
+                    const players = ['ohara', 'okamon', 'seike'];
+                    players.forEach(player => {
+                        totalWinnerVotes += currentVotes[`${player}-winner`] || 0;
+                        totalLoserVotes += currentVotes[`${player}-loser`] || 0;
+                    });
+                    players.forEach(player => {
+                        const winnerCount = currentVotes[`${player}-winner`] || 0;
+                        const winnerBar = document.querySelector(`.bar[data-player="${player}-winner-bar"]`);
+                        const winnerCountEl = document.querySelector(`.count[data-player="${player}-winner-count"]`);
+                        if (winnerBar && winnerCountEl) {
+                            const percentage = totalWinnerVotes > 0 ? (winnerCount / totalWinnerVotes) * 100 : 0;
+                            winnerBar.style.width = `${Math.max(0.5, Math.min(100,percentage))}%`;
+                            winnerCountEl.textContent = winnerCount;
+                        }
+                        const loserCount = currentVotes[`${player}-loser`] || 0;
+                        const loserBar = document.querySelector(`.bar[data-player="${player}-loser-bar"]`);
+                        const loserCountEl = document.querySelector(`.count[data-player="${player}-loser-count"]`);
+                        if (loserBar && loserCountEl) {
+                            const percentage = totalLoserVotes > 0 ? (loserCount / totalLoserVotes) * 100 : 0;
+                            loserBar.style.width = `${Math.max(0.5, Math.min(100,percentage))}%`;
+                            loserCountEl.textContent = loserCount;
+                        }
+                    });
+                }
+            }
+
+            function initMessageBoard() {
+                const messageInput = document.getElementById('message-input');
+                const submitBtn = document.getElementById('submit-message-btn');
+                const board = document.getElementById('message-board');
+                let messages = [];
+                try {
+                    messages = JSON.parse(localStorage.getItem(MESSAGES_STORAGE_KEY)) || [];
+                } catch(e) { console.error("Error parsing messages from localStorage", e); messages = []; }
+
+                renderMessagesDOM(messages, board);
+
+                if(submitBtn && messageInput && board) {
+                    submitBtn.addEventListener('click', () => {
+                        const text = messageInput.value.trim();
+                        if (text && text.length <= 200) {
+                            const newMessage = {
+                                text: escapeHtml(text),
+                                timestamp: new Date().toLocaleString('ja-JP', {dateStyle: 'short', timeStyle: 'short'})
+                            };
+                            messages.unshift(newMessage);
+                            if (messages.length > 30) messages = messages.slice(0, 30);
+                            try {
+                                localStorage.setItem(MESSAGES_STORAGE_KEY, JSON.stringify(messages));
+                            } catch(e) { console.error("Error saving messages to localStorage", e); }
+                            renderMessagesDOM(messages, board);
+                            messageInput.value = '';
+                            gsap.fromTo(submitBtn, {scale: 1}, {scale: 0.95, yoyo: true, repeat: 1, duration: 0.1, ease: "power1.inOut"});
+                        } else if (text.length > 200) {
+                            alert("メッセージは200文字以内で入力してください。");
+                        } else if (!text) {
+                            alert("メッセージを入力してください。");
+                        }
+                    });
+                }
+
+                function renderMessagesDOM(currentMessages, targetBoard) {
+                    if (!targetBoard) return;
+                    const h4 = targetBoard.querySelector('h4');
+                    Array.from(targetBoard.children).forEach(child => {
+                        if (child !== h4) child.remove();
+                    });
+                    if (currentMessages.length === 0) {
+                        const p = document.createElement('p');
+                        p.textContent = 'まだ応援メッセージはありません。一番乗りで投稿しよう！';
+                        p.style.textAlign = 'center';
+                        p.style.color = '#888';
+                        p.style.padding = '10px';
+                        targetBoard.appendChild(p);
+                        return;
+                    }
+                    currentMessages.forEach(msg => {
+                        const item = document.createElement('div');
+                        item.classList.add('message-item');
+                        const p = document.createElement('p');
+                        p.innerHTML = msg.text; // escapeHtml済みのためinnerHTMLでOK
+                        const small = document.createElement('small');
+                        small.textContent = msg.timestamp;
+                        item.appendChild(p);
+                        item.appendChild(small);
+                        targetBoard.appendChild(item);
+                        gsap.from(item, {autoAlpha:0, y:20, duration: 0.3, ease: "power1.out"});
+                    });
+                }
+
+                function escapeHtml(unsafe) {
+                    if (typeof unsafe !== 'string') return '';
+                    return unsafe
+                         .replace(/&/g, "&")
+                         .replace(/</g, "<")
+                         .replace(/>/g, ">")
+                         .replace(/"/g, "")
+                         .replace(/'/g, "'");
+                }
+            }
+
+        }); // End DOMContentLoaded
+    </script>
+</body>
+</html>
